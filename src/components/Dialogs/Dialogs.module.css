@@ -1,4 +1,28 @@
-.content {
-    grid-area: c;
-    background-color: cornflowerblue;
+.dialogs {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+
+.dialogsItem {
+
+}
+.dialogsItem .active{
+    color: gold;
+}
+.dialogsMassage{
+    display: flex;
+width: 500px;
+    justify-content: space-around;
+
+}
+.dialog {
+
+}
+.messagesText {
+    width: 75%;
+}
+
+.message {
+
 }
