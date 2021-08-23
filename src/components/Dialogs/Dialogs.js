@@ -18,7 +18,7 @@ function Dialogs(props) {
     let messagesElements = state.messagesData.map(m => <Message message={m.message}/>);
     let newMessageBody = state.newMessageBody;
 
-    let onSendMessageClick = () =>{
+    let onSendMessageClick = () => {
         props.store.dispatch(sendMessageCrestor())
 
     }
