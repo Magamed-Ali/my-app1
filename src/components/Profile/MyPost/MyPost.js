@@ -1,21 +1,17 @@
 import React from 'react';
 import s from './MyPost.module.css';
 import Post from './Post/Post';
-import {addPostActionCreator, updateNewPostText, updateNewPostTextActionCreator} from "../../../redax/profile-reducer";
-
-
 
 const MyPost = (props) => {
-    let postElements = props.postData.map(index => <Post message={index.message} likesCount={index.likesCount}/>);
+    let postElements = props.posts.map(index => <Post massage={index.message} likesCount={index.likesCount}/>)
     let newPostElement = React.createRef();
 
-    let addPost = () => {
-        props.dispatch(addPostActionCreator())
+    let onAddPost = () => {
+        props.addPost();
     }
     let onPostChenge = () => {
         let text = newPostElement.current.value;
-        let action = updateNewPostTextActionCreator(text);
-        props.dispatch(action);
+        props.updateNewPostText(text)
     }
     return (
         <div className={s.postBlock}>
@@ -29,7 +25,7 @@ const MyPost = (props) => {
 
                     </textarea>
                 </div>
-                <button onClick={addPost}>Add post</button>
+                <button onClick={onAddPost}>Add post</button>
             </div>
             <div className={s.posts}>
                 {postElements}

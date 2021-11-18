@@ -4,9 +4,12 @@ import dialogsReducer from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 
 let store = {
+
     _state: {
         profilePage: {
-            postData: [
+            posts: [
+                {id: 1, message: "Hi, how are you?", likesCount: 12},
+                {id: 2, message: "It's my first post", likesCount: 44},
                 {id: 1, message: "Hi, how are you?", likesCount: 12},
                 {id: 2, message: "It's my first post", likesCount: 44}
             ],
@@ -44,8 +47,10 @@ let store = {
     },
 
     getState() {
-        return this._state
+        debugger;
+        return this._state;
     },
+
     subscribe(observer) {
         this._callSubscriber = observer;
     },

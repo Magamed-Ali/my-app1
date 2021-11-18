@@ -2,6 +2,7 @@ import React from 'react';
 import s from './Navbar.module.css'
 import {NavLink} from "react-router-dom";
 import Friends from "./Friends/Friends";
+import StoreContext from "../../StoreContext";
 
 
 function Navbar(props) {
@@ -22,8 +23,16 @@ function Navbar(props) {
             <div className={s.item}>
                 <NavLink to="/settings" activeClassName={s.active}>Settings</NavLink>
             </div>
-            <Friends state={props.state}/>
+            <StoreContext.Consumer>
+                {
+                    (store) => {
+                        let state = store;
+                        return <Friends state={state}/>
+                    }
+                }
+            </StoreContext.Consumer>
         </nav>
+
 
     );
 }

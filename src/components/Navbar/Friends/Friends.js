@@ -3,13 +3,12 @@ import s from "./Friends.module.css"
 import Frend from "./Frend/Frend";
 
 function Friends(props) {
-
-    let frendUser = props.state.map(f => <Frend name={f.name}/>);
+    let frondUser = props.state.getState().frendsNavbar.frends.map(f => <Frend name={f.name}/>);
     return (
         <div>
             <h5>Friends</h5>
             <div className={s.frenddsUser}>
-                {frendUser}
+                {frondUser}
             </div>
         </div>
     );

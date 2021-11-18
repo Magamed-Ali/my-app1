@@ -1,26 +1,26 @@
 import React, {useState} from 'react';
 import s from './Dialogs.module.css'
-import {NavLink} from "react-router-dom";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {sendMessageCrestor, updateNewMasag, updateNewMessageBodyCreator, updateNewPostTextActionCreator
+import {
+    sendMessageCrestor, updateNewMasag, updateNewMessageBodyCreator, updateNewPostTextActionCreator
 } from "../../redax/dialogs-reducer";
 
 
 function Dialogs(props) {
-    let state = props.store.getState().dialogsPage;
+    let state = props.dialogsPage;
 
     let dialogsElements = state.dialogsData.map(d => <DialogItem name={d.name} id={d.id}/>);
     let messagesElements = state.messagesData.map(m => <Message message={m.message}/>);
     let newMessageBody = state.newMessageBody;
 
     let onSendMessageClick = () => {
-        props.store.dispatch(sendMessageCrestor())
+        props.sendMessage();
 
     }
-    let onNewMessageChenge = (e) =>{
+    let onNewMessageChenge = (e) => {
         let body = e.target.value;
-        props.store.dispatch(updateNewMessageBodyCreator(body));
+        props.updateNewMessageBody(body);
     }
 
     return (
@@ -35,11 +35,17 @@ function Dialogs(props) {
                 <div>
                     <div><textarea value={newMessageBody}
                                    onChange={onNewMessageChenge}
-                                   placeholder="Enter your message"></textarea></div>
+                                   placeholder="Enter your message">
 
-                    <div><button onClick={onSendMessageClick}>Send</button></div>
+                    </textarea>
+                    </div>
+
+                    <div>
+                        <button onClick={onSendMessageClick}>Send</button>
+                    </div>
                 </div>
             </div>
-        </>);}
+        </>);
+}
 
 export default Dialogs;

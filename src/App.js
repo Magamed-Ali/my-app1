@@ -8,8 +8,7 @@ import {BrowserRouter, Route} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import Friends from "./components/Navbar/Friends/Friends";
-import {updateNewPostText} from "./redax/state";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 function App(props) {
     return (
@@ -17,22 +16,16 @@ function App(props) {
             <div className="app-wrapper">
                 <Header/>
                 {/*<NavBar state={props.state.frendsNavbar.frends}/>*/}
-
-               <NavBar state={props.state.frendsNavbar.frends}/>
-
+                <NavBar />
                 <div className="app-wrapper-content">
                     {/*<Route exact path='/dialogs' component={Dialogs}/>
                 <Route exact path='/profile' component={Profile}/>*/}
 
-                    <Route exact path='/dialogs'
-                           render={() => <Dialogs
-                               store={props.store}
-                           />}/>
+                    <Route path='/dialogs'
+                           render={() => <DialogsContainer/>}/>
 
-                    <Route exact path='/profile'
-                           render={() => <Profile
-                               profilePage={props.state.profilePage}
-                               dispatch={props.dispatch} /> } />
+                    <Route path='/profile'
+                           render={() => <Profile />} />
 
                     <Route exact path='/news' component={News}/>
                     <Route exact path='/music' component={Music}/>
