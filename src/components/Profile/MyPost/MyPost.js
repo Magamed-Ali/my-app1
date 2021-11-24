@@ -3,9 +3,8 @@ import s from './MyPost.module.css';
 import Post from './Post/Post';
 
 const MyPost = (props) => {
-    let postElements = props.posts.map(index => <Post massage={index.message} likesCount={index.likesCount}/>)
+    let postElements = props.posts.map(index => <Post massage={index.message} likesCount={index.likesCount}  />)
     let newPostElement = React.createRef();
-
     let onAddPost = () => {
         props.addPost();
     }

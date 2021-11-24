@@ -4,19 +4,11 @@ import App from "./App";
 import "./style.css"
 import store from "./redax/redux-store";
 import {BrowserRouter} from "react-router-dom";
-import StoreContext from "./StoreContext";
+import {Provider} from "react-redux";
 
-    let rerenderEntire = (state) =>{
-    ReactDom.render(
-        <BrowserRouter>
-            <StoreContext.Provider value={store}>
+ReactDom.render(
+    <BrowserRouter>
+        <Provider store={store}>
             <App/>
-            </StoreContext.Provider>
-        </BrowserRouter>, document.getElementById('root'));
-}
-rerenderEntire(store.getState());
-
-store.subscribe(()=>{
-    let state = store.getState();
-    rerenderEntire(state)
-})
+        </Provider>
+    </BrowserRouter>, document.getElementById('root'));
