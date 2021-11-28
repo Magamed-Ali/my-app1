@@ -9,7 +9,6 @@ function Profile(props) {
         <div>
             <ProfileInfo/>
             <MyPostContainer/>
-
         </div>
     );
 }

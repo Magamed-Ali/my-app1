@@ -1,49 +1,36 @@
 import React from "react";
 import style from "./users.module.css";
+import * as axios from 'axios'
+import userPhoto from "../../assets/images/24.png"
 
 
 let Users = (props) => {
-    if (props.users.length === 0) {
-        props.setUsersAC([
-            {
-                id: 1,
-                photoUrl: 'https://get.wallhere.com/photo/car-vehicle-Ford-2015-Truck-netcarshow-netcar-car-images-car-photo-F-150-wheel-land-vehicle-automotive-exterior-automobile-make-bumper-pickup-truck-397539.jpg',
-                followed: false,
-                fullName: 'Dmitry',
-                status: 'I am a boss',
-                location: {city: 'Minsk', conutry: 'Belarus'}
-            },
-            {
-                id: 2,
-                photoUrl: 'https://get.wallhere.com/photo/car-vehicle-Ford-2015-Truck-netcarshow-netcar-car-images-car-photo-F-150-wheel-land-vehicle-automotive-exterior-automobile-make-bumper-pickup-truck-397539.jpg',
-                followed: true,
-                fullName: 'Aleg',
-                status: 'I am a boss',
-                location: {city: 'Grozny', conutry: 'Chechen republick'}
-            },
-            {
-                id: 3,
-                photoUrl: 'https://get.wallhere.com/photo/car-vehicle-Ford-2015-Truck-netcarshow-netcar-car-images-car-photo-F-150-wheel-land-vehicle-automotive-exterior-automobile-make-bumper-pickup-truck-397539.jpg',
-                followed: false,
-                fullName: 'Mosha',
-                status: 'I am a boss',
-                location: {city: 'Moscov', conutry: 'Belarus'}
-            },
-            {
-                id: 4,
-                photoUrl: 'https://get.wallhere.com/photo/car-vehicle-Ford-2015-Truck-netcarshow-netcar-car-images-car-photo-F-150-wheel-land-vehicle-automotive-exterior-automobile-make-bumper-pickup-truck-397539.jpg',
-                followed: true,
-                fullName: 'Gosha',
-                status: 'I am a boss',
-                location: {city: 'Kiev', conutry: 'Ukraine'}
-            }])
+    debugger
+    let getUsers = () => {
+        if (props.users.length === 0) {
+            axios.get("https://social-network.samuraijs.com/api/1.0/users")
+                .then(response => {
+                props.setUsersAC(response.data.items)
+            });
+        }
     }
+
     return <div>
+        <div>
+            <div>список Имен:
+                <div>{
+                    props.users.map(a => <div key={a.id}>
+                        <div>{a.name}</div>
+                    </div>)
+                }</div>
+            </div></div>
+
+        <button onClick={getUsers}>click</button>
         {
             props.users.map(u => <div key={u.id}>
                 <div>
                     <div>
-                        <img src={u.photoUrl} className={style.photo}/>
+                        <img src={u.photos.small != null ? u.photos.small : userPhoto} className={style.photo}/>
                     </div>
                     <div>
                         <div>
@@ -56,14 +43,14 @@ let Users = (props) => {
                         </div>
                     </div>
                     <div>
-                        <span>{u.fullName}</span><span>{u.status}</span>
+                        <span>{u.name}</span>
+                        <span>{u.status}</span>
                     </div>
                     <div>
-                        <div>{u.location.city}</div>
-                        <div>{u.location.country}</div>
+                        <div>{"u.location.city"}</div>
+                        <div>{"u.location.country"}</div>
                     </div>
                 </div>
-                <div></div>
             </div>)
         }
     </div>
