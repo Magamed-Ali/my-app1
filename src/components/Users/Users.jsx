@@ -7,14 +7,26 @@ import userPhoto from "../../assets/images/24.png"
 let Users = (props) => {
     let getUsers = () => {
         if (props.users.length === 0) {
-            axios.get("https://social-network.samuraijs.com/api/1.0/users")
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${props.currentPage}&count=${props.pageSize}`)
                 .then(response => {
-                props.setUsersAC(response.data.items)
-            });
+                    props.setUsersAC(response.data.items)
+                });
         }
+    }
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+
+    let pages =[];
+    for (let i=1; i<= pagesCount; i++){
+        pages.push(i)
     }
 
     return <div>
+        <div>
+            {pages.map(p => {
+                return <span className={props.currentPage === p && style.selectedPage}
+                             onClick={()=>{props.setCurrentPage(p)}}>{p}</span>
+            })}
+        </div>
         <div>
             <div>список Имен:
                 <div>{
@@ -22,7 +34,8 @@ let Users = (props) => {
                         <div>{a.name}</div>
                     </div>)
                 }</div>
-            </div></div>
+            </div>
+        </div>
 
         <button onClick={getUsers}>click</button>
         {

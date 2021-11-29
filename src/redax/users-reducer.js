@@ -1,9 +1,13 @@
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS'
+const SET_CURRENT_PAGE ='SET_CURRENT_PAGE'
 
 let initialState = {
-    users: []
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 190,
+    currentPage: 10
 };
 
 const usersReducer = (state = initialState, acttion) => {
@@ -32,6 +36,9 @@ const usersReducer = (state = initialState, acttion) => {
 
         case SET_USERS: {
             return {...state, users: [...acttion.users]}
+        }
+        case SET_CURRENT_PAGE: {
+            return {...state, currentPage: acttion.currentPage}
         }
         default:
             return state;
