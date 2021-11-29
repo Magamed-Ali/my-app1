@@ -5,7 +5,6 @@ import userPhoto from "../../assets/images/24.png"
 
 
 let Users = (props) => {
-    debugger
     let getUsers = () => {
         if (props.users.length === 0) {
             axios.get("https://social-network.samuraijs.com/api/1.0/users")

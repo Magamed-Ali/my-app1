@@ -2,18 +2,18 @@ import React from "react";
 import style from "./users.module.css";
 import * as axios from 'axios'
 import userPhoto from "../../assets/images/24.png"
-import {render} from "react-dom";
 
 
 class Users extends React.Component {
 
-    getUsers = () => {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users")
-            .then(response => {
-                this.props.setUsersAC(response.data.items)
-            });
-    }
+    componentDidMount() {
 
+            alert("new")
+            axios.get("https://social-network.samuraijs.com/api/1.0/users")
+                .then(response => {
+                    this.props.setUsersAC(response.data.items)
+                });
+    }
 
 
     render() {
@@ -29,7 +29,7 @@ class Users extends React.Component {
                     </div>
                 </div>
             }
-            <button onClick={this.getUsers}>click</button>
+            {/*<button onClick={this.getUsers}>click</button>*/}
             {
                 this.props.users.map(u => <div key={u.id}>
                     <div>
