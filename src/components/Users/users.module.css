@@ -4,4 +4,9 @@
 }
 .selectedPage{
     font-weight: bold;
+    cursor: pointer;
+}
+.Users{
+text-align: center;
+    width: 500px;
 }

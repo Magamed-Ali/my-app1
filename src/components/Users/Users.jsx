@@ -15,16 +15,25 @@ let Users = (props) => {
     }
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
-    let pages =[];
-    for (let i=1; i<= pagesCount; i++){
+    let pages = [];
+    for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
-
+    let onPageChanged = (pageNumber) => {
+        props.setCurrentPage(pageNumber);
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${props.pageSize}`)
+            .then(response => {
+                props.setUsersAC(response.data.items);
+                props.setTotalUsersCount(response.data.totalCount)
+            });
+    }
     return <div>
         <div>
             {pages.map(p => {
                 return <span className={props.currentPage === p && style.selectedPage}
-                             onClick={()=>{props.setCurrentPage(p)}}>{p}</span>
+                                  onClick={(e) => {
+                                      onPageChanged(p)
+                                  }}>{p}</span>
             })}
         </div>
         <div>
