@@ -1,39 +1,21 @@
 import React from "react";
 import style from "./users.module.css";
-import * as axios from 'axios'
-import userPhoto from "../../assets/images/24.png"
-
+import userPhoto from "../../assets/images/24.png";
 
 let Users = (props) => {
-    let getUsers = () => {
-        if (props.users.length === 0) {
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${props.currentPage}&count=${props.pageSize}`)
-                .then(response => {
-                    props.setUsersAC(response.data.items)
-                });
-        }
-    }
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
-    let onPageChanged = (pageNumber) => {
-        props.setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${props.pageSize}`)
-            .then(response => {
-                props.setUsersAC(response.data.items);
-                props.setTotalUsersCount(response.data.totalCount)
-            });
-    }
     return <div>
         <div className={style.Users}>
             {pages.map(p => {
                 return <span className={props.currentPage === p && style.selectedPage}
-                                  onClick={(e) => {
-                                      onPageChanged(p)
-                                  }}>{p}</span>
+                             onClick={(e) => {
+                                 props.onPageChanged(p)
+                             }}>{p}</span>
             })}
         </div>
         <div>
@@ -46,7 +28,7 @@ let Users = (props) => {
             </div>
         </div>
 
-        <button onClick={getUsers}>click</button>
+        <button onClick={props.getUsers}>click</button>
         {
             props.users.map(u => <div key={u.id}>
                 <div>
@@ -76,5 +58,6 @@ let Users = (props) => {
         }
     </div>
 }
+
 
 export default Users;
