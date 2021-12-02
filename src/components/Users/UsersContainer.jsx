@@ -1,6 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {followAC, setCurrentPageAC, setUsersAC, setUserTotalCountAC, unfollowAC} from '../../redax/users-reducer';
+import {
+    followAC,
+    setCurrentPageAC,
+    setUsersAC,
+    setUserTotalCountAC,
+    toggleIsFetchingAC,
+    unfollowAC
+} from '../../redax/users-reducer';
 import * as axios from 'axios';
 import Users from './Users';
 import preloader from '../../assets/images/1495.gif';
@@ -10,17 +17,21 @@ import preloader from '../../assets/images/1495.gif';
  let UsersContainer = (props) => {
     let getUsers = () => {
         if (props.users.length === 0) {
+            props.toggleIsFetching(true)
             axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${props.currentPage}&count=${props.pageSize}`)
                 .then(response => {
+                    props.toggleIsFetching(false)
                     props.setUsersAC(response.data.items)
                 });
         }
     }
 
     let onPageChanged = (pageNumber) => {
+        props.toggleIsFetching(true)
         props.setCurrentPage(pageNumber);
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${props.pageSize}`)
             .then(response => {
+                props.toggleIsFetching(false)
                 props.setUsersAC(response.data.items);
                 props.setTotalUsersCount(response.data.totalCount)
             });
@@ -70,6 +81,9 @@ let mapDispatchToProps = (dispatch) => {
         },
         setTotalUsersCount: (totalCount) => {
             dispatch(setUserTotalCountAC(totalCount))
+        },
+        toggleIsFetching: (isFetching) => {
+            dispatch(toggleIsFetchingAC(isFetching))
         }
     }
 }
