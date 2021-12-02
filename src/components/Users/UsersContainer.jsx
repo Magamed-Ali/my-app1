@@ -1,8 +1,9 @@
-import React from "react";
-import {connect} from "react-redux";
-import {followAC, setCurrentPageAC, setUsersAC, setUserTotalCountAC, unfollowAC} from "../../redax/users-reducer";
-import * as axios from "axios";
-import Users from "./Users";
+import React from 'react';
+import {connect} from 'react-redux';
+import {followAC, setCurrentPageAC, setUsersAC, setUserTotalCountAC, unfollowAC} from '../../redax/users-reducer';
+import * as axios from 'axios';
+import Users from './Users';
+import preloader from '../../assets/images/1495.gif';
 
 
 
@@ -24,7 +25,9 @@ import Users from "./Users";
                 props.setTotalUsersCount(response.data.totalCount)
             });
     }
-    return <Users users = {props.users}
+    return <>
+        {props.isFetching ? <img src={preloader}/> : null }
+     <Users users = {props.users}
                   pageSize = {props.pageSize}
                   totalUsersCount = {props.totalUsersCount}
                   currentPage = {props.currentPage}
@@ -35,6 +38,7 @@ import Users from "./Users";
 
 
     />
+    </>
 
 
 }
@@ -44,7 +48,8 @@ let mapStateToProps = (state) => {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
-        currentPage: state.usersPage.currentPage
+        currentPage: state.usersPage.currentPage,
+        isFetching: state.usersPage.isFetching
 
     }
 }
