@@ -4,7 +4,6 @@
 }
 .selectedPage{
     font-weight: bold;
-
 }
 .Users{
 display: flex;
@@ -12,4 +11,7 @@ display: flex;
     width: 500px;
     border: 1px solid #333;
     cursor: pointer;
+}
+.boxMargin{
+    margin-right: 5px;
 }

@@ -10,11 +10,10 @@ import {
 } from '../../redax/users-reducer';
 import * as axios from 'axios';
 import Users from './Users';
-import preloader from '../../assets/images/1495.gif';
+import Preloader from "../common/preloader/preloader";
 
 
-
- let UsersContainer = (props) => {
+let UsersContainer = (props) => {
     let getUsers = () => {
         if (props.users.length === 0) {
             props.toggleIsFetching(true)
@@ -37,18 +36,18 @@ import preloader from '../../assets/images/1495.gif';
             });
     }
     return <>
-        {props.isFetching ? <img src={preloader}/> : null }
-     <Users users = {props.users}
-                  pageSize = {props.pageSize}
-                  totalUsersCount = {props.totalUsersCount}
-                  currentPage = {props.currentPage}
-                  onPageChanged = {onPageChanged}
-                  getUsers = {getUsers}
-                  follow = {props.follow}
-                  unfollow = {props.unfollow}
+        {props.isFetching ? <Preloader/> : null}
+        <Users users={props.users}
+               pageSize={props.pageSize}
+               totalUsersCount={props.totalUsersCount}
+               currentPage={props.currentPage}
+               onPageChanged={onPageChanged}
+               getUsers={getUsers}
+               follow={props.follow}
+               unfollow={props.unfollow}
 
 
-    />
+        />
     </>
 
 

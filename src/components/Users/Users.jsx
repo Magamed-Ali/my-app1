@@ -9,11 +9,13 @@ let Users = (props) => {
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
+    let Newpages = pages.join(', ');
+    console.log(Newpages)
 
     return <div>
         <div className={style.Users}>
             {pages.map(p => {
-                return <span className={props.currentPage === p && style.selectedPage}
+                return <span className={`${props.currentPage === p && style.selectedPage} ${style.boxMargin}`}
                              onClick={(e) => {
                                  props.onPageChanged(p)
                              }}>{p}</span>
