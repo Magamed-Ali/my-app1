@@ -1,9 +1,10 @@
 import React from 'react';
-import preloader from "../../../assets/images/1495.gif";
+import preloader from "../../../assets/images/loading-6.gif";
+import ploader from "./ploader.module.css"
 
 let Preloader = (props)=>{
     return <div>
-        <img src={preloader}/>
+        <img className={ploader.ploader} src={preloader}/>
     </div>
 }
 export default Preloader;

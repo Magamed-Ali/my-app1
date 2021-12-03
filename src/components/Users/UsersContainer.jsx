@@ -1,12 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {
-    followAC,
-    setCurrentPageAC,
-    setUsersAC,
-    setUserTotalCountAC,
-    toggleIsFetchingAC,
-    unfollowAC
+    follow,
+    setCurrentPage,
+    setUsers,
+    setUserTotalCount,
+    toggleIsFetching,
+    unfollow
 } from '../../redax/users-reducer';
 import * as axios from 'axios';
 import Users from './Users';
@@ -32,7 +32,7 @@ let UsersContainer = (props) => {
             .then(response => {
                 props.toggleIsFetching(false)
                 props.setUsersAC(response.data.items);
-                props.setTotalUsersCount(response.data.totalCount)
+                props.setUserTotalCount(response.data.totalCount)
             });
     }
     return <>
@@ -64,7 +64,7 @@ let mapStateToProps = (state) => {
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
+/*let mapDispatchToProps = (dispatch) => {
     return {
         follow: (userId) => {
             dispatch(followAC(userId))
@@ -85,7 +85,14 @@ let mapDispatchToProps = (dispatch) => {
             dispatch(toggleIsFetchingAC(isFetching))
         }
     }
-}
+}*/
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default connect(mapStateToProps, {
+    follow: follow,
+    unfollow: unfollow,
+    setUsersAC: setUsers,
+    setCurrentPage: setCurrentPage,
+    setUserTotalCount: setUserTotalCount,
+    toggleIsFetching: toggleIsFetching
+})(UsersContainer);
