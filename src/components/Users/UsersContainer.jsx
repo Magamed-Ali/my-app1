@@ -20,7 +20,7 @@ let UsersContainer = (props) => {
             axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${props.currentPage}&count=${props.pageSize}`)
                 .then(response => {
                     props.toggleIsFetching(false)
-                    props.setUsersAC(response.data.items)
+                    props.setUsers(response.data.items)
                 });
         }
     }
@@ -31,7 +31,7 @@ let UsersContainer = (props) => {
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${props.pageSize}`)
             .then(response => {
                 props.toggleIsFetching(false)
-                props.setUsersAC(response.data.items);
+                props.setUsers(response.data.items);
                 props.setUserTotalCount(response.data.totalCount)
             });
     }
@@ -89,10 +89,10 @@ let mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps, {
-    follow: follow,
-    unfollow: unfollow,
-    setUsersAC: setUsers,
-    setCurrentPage: setCurrentPage,
-    setUserTotalCount: setUserTotalCount,
-    toggleIsFetching: toggleIsFetching
+    follow,
+    unfollow,
+    setUsers,
+    setCurrentPage,
+    setUserTotalCount,
+    toggleIsFetching
 })(UsersContainer);
