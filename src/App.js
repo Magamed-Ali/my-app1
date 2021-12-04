@@ -10,6 +10,7 @@ import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 function App(props) {
     return (
@@ -26,7 +27,7 @@ function App(props) {
                            render={() => <DialogsContainer/>}/>
 
                     <Route path='/profile'
-                           render={() => <Profile />} />
+                           render={() => <ProfileContainer />} />
 
                     <Route path='/users'
                            render={() => <UsersContainer />}/>
