@@ -10,7 +10,7 @@ import {
 } from '../../redax/users-reducer';
 import * as axios from 'axios';
 import Users from './Users';
-import Preloader from "../common/preloader/preloader";
+import Preloader from "../common/preloader/Preloader";
 
 
 let UsersContainer = (props) => {
