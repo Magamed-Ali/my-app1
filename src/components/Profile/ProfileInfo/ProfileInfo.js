@@ -6,7 +6,6 @@ function ProfileInfo(props) {
     if(!props.profile){
         return <Preloader/>
     }
-    debugger
     return (
         <div>
             <div className={s.content}>
@@ -14,6 +13,8 @@ function ProfileInfo(props) {
             </div>
             <div className={s.descriotionBlock}>
                 <img src={props.profile.photos.large}/>
+                <div>{props.profile.fullName}</div>
+                <div>{props.profile.lookingForAJobDescription}</div>
                 ava + description
             </div>
         </div>
