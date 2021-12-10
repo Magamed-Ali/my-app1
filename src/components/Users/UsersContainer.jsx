@@ -10,15 +10,14 @@ import {
 } from '../../redax/users-reducer';
 import Users from './Users';
 import Preloader from "../common/preloader/Preloader";
-import {getUser} from "../../api/api";
+import {getUser2, usersAPI} from "../../api/api";
 
 
 let UsersContainer = (props) => {
     let getUsers = () => {
         if (props.users.length === 0) {
             props.toggleIsFetching(true)
-
-            getUser(props.currentPage, props.pageSize)
+            usersAPI.getUser(props.currentPage, props.pageSize)
                 .then(data => {
                     props.toggleIsFetching(false);
                     props.setUsers(data.items);
@@ -31,11 +30,10 @@ let UsersContainer = (props) => {
         props.toggleIsFetching(true)
         props.setCurrentPage(pageNumber);
 
-        getUser(pageNumber, props.pageSize)
+        usersAPI.getUser(pageNumber, props.pageSize)
             .then(data => {
                 props.toggleIsFetching(false)
                 props.setUsers(data.items);
-
             });
     }
     return <>

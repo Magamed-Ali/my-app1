@@ -10,8 +10,7 @@ let Users = (props) => {
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i)
     }
-    let Newpages = pages.join(', ');
-    console.log(Newpages)
+
 
     return <div>
         <div className={style.Users}>
@@ -25,6 +24,7 @@ let Users = (props) => {
         <div>
             <div>список Имен:
                 <div>{
+
                     props.users.map(a => <div key={a.id}>
                         <div>{a.name}</div>
                     </div>)
