@@ -8,19 +8,21 @@ import {
     toggleIsFetching,
     unfollow
 } from '../../redax/users-reducer';
-import * as axios from 'axios';
 import Users from './Users';
 import Preloader from "../common/preloader/Preloader";
+import {getUser} from "../../api/api";
 
 
 let UsersContainer = (props) => {
     let getUsers = () => {
         if (props.users.length === 0) {
             props.toggleIsFetching(true)
-            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${props.currentPage}&count=${props.pageSize}`)
-                .then(response => {
-                    props.toggleIsFetching(false)
-                    props.setUsers(response.data.items)
+
+            getUser(props.currentPage, props.pageSize)
+                .then(data => {
+                    props.toggleIsFetching(false);
+                    props.setUsers(data.items);
+                    props.setUserTotalCount(data.totalCount);
                 });
         }
     }
@@ -28,11 +30,12 @@ let UsersContainer = (props) => {
     let onPageChanged = (pageNumber) => {
         props.toggleIsFetching(true)
         props.setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${props.pageSize}`)
-            .then(response => {
+
+        getUser(pageNumber, props.pageSize)
+            .then(data => {
                 props.toggleIsFetching(false)
-                props.setUsers(response.data.items);
-                props.setUserTotalCount(response.data.totalCount)
+                props.setUsers(data.items);
+
             });
     }
     return <>
