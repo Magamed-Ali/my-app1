@@ -6,9 +6,6 @@ import frendsReducer from "./frends-reduser";
 import usersReducer from "./users-reducer";
 import authReducer from "./auth-reducer";
 
-
-
-
 let reducers = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
@@ -16,10 +13,7 @@ let reducers = combineReducers({
     frendsNavbar: frendsReducer,
     usersPage: usersReducer,
     auth: authReducer
-
 });
-
-
 let  store = createStore(reducers);
 
 window.store = store;

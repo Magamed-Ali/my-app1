@@ -16,8 +16,27 @@ export const usersAPI = {
             });
     },
     getUser2(currentPage = 1, pageSize = 10) {
-        return instance.get(`follow?page=${currentPage}&count=${pageSize}`,)
+        return instance.get(`follow?page=${currentPage}&count=${pageSize}`)
             .then(response => response.data);
+    },
+
+    clickUnfollow(u, un){
+        return instance.delete(`follow/${u}`)
+            .then(response => {
+                if(response.data.resultCode == 0){
+                    return un;
+                }
+            });
+    },
+
+    clickFollow(u, un){
+        return instance.post(`follow/${u}`)
+            .then(response => {
+                if(response.data.resultCode == 0){
+                    return un;
+                }
+            });
     }
 
 }
+
